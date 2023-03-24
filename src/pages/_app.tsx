@@ -3,6 +3,7 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
+import Layout from '@/components/Layout'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({
@@ -18,9 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DefaultSeo {...SEO} />
-      <main className={`${inter.variable} font-sans`}>
+      <Layout>
         <Component {...pageProps} />
-      </main>
+      </Layout>
     </>
   )
 }
