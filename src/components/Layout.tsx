@@ -11,7 +11,7 @@ type ContainerProps = {
   children: React.ReactNode
 }
 
-export default function Layout(props: ContainerProps) {
+export function Layout(props: ContainerProps) {
   const { className, children, ...rest } = props
 
   return (
