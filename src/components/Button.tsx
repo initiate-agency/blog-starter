@@ -11,20 +11,24 @@ const baseStyles: Record<ButtonVariant, string> = {
 
 const variantStyles = {
   solid: {
-    cyan: 'relative overflow-hidden bg-cyan-700 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-cyan-600 active:text-white/80 before:transition-colors',
-    white: 'bg-white text-cyan-900 hover:bg-white/90 active:bg-white/90 active:text-cyan-900/70',
-    slate: 'bg-slate-800 text-white hover:bg-slate-900 active:bg-slate-800 active:text-white/80'
+    primary:
+      'relative overflow-hidden bg-primary-700 text-white before:absolute before:inset-0 active:before:bg-transparent hover:before:bg-white/10 active:bg-primary-600 active:text-white/80 before:transition-colors',
+    white:
+      'bg-white text-primary-900 hover:bg-white/90 active:bg-white/90 active:text-primary-900/70',
+    neutral:
+      'bg-neutral-800 text-white hover:bg-neutral-900 active:bg-neutral-800 active:text-white/80'
   },
   outline: {
-    cyan: 'border-cyan-300 text-cyan-700 hover:border-cyan-400 active:bg-cyan-100 active:text-cyan-700/80',
+    primary:
+      'border-primary-300 text-primary-700 hover:border-primary-400 active:bg-primary-100 active:text-primary-700/80',
     white: 'border-white text-white hover:border-white/80 active:bg-white/80 active:text-white/80',
-    slate:
-      'border-slate-300 text-slate-700 hover:border-slate-400 active:bg-slate-100 active:text-slate-700/80'
+    neutral:
+      'border-neutral-300 text-neutral-700 hover:border-neutral-400 active:bg-neutral-100 active:text-neutral-700/80'
   }
 }
 
 type ButtonVariant = 'solid' | 'outline'
-type ButtonColor = 'cyan' | 'white' | 'slate'
+type ButtonColor = 'primary' | 'white' | 'neutral'
 
 interface CommonButtonProps {
   variant?: ButtonVariant
@@ -37,7 +41,7 @@ type ButtonElementProps = CommonButtonProps & ButtonHTMLAttributes<HTMLButtonEle
 
 type ButtonProps = ButtonElementProps
 
-function Button({ variant = 'solid', color = 'slate', className, ...props }: ButtonProps) {
+function Button({ variant = 'solid', color = 'neutral', className, ...props }: ButtonProps) {
   className = clsx(baseStyles[variant], variantStyles[variant][color], className)
 
   return <button className={className} {...props} />
@@ -53,7 +57,7 @@ function isAnchorElement(href: string) {
 
 function ButtonLink({
   variant = 'solid',
-  color = 'slate',
+  color = 'neutral',
   className,
   href,
   ...props
