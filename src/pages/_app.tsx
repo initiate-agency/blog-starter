@@ -3,7 +3,7 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
-import Layout from '@/components/Layout'
+import { Layout } from '@/components/Layout'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
