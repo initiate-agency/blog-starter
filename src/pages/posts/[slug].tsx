@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { getPostBySlug, getPosts, PostOrPage } from '@/cms'
 
@@ -9,12 +10,29 @@ type PostPageProps = {
 
 export default function PostPage({ post }: PostPageProps) {
   return (
-    <Container>
-      <article className="prose lg:prose-xl">
+    <article>
+      <Container className="prose my-12 lg:prose-xl sm:my-16">
         <h1>{post.title}</h1>
-        {post.html && <div dangerouslySetInnerHTML={{ __html: post.html }} />}
-      </article>
-    </Container>
+      </Container>
+      <div className="h-[250px] w-full shadow-xl ring-1 ring-neutral-900/10 lg:h-[500px]">
+        <img src={post.feature_image || ''} className="h-full w-full object-cover" alt="" />
+      </div>
+      <Container className="prose my-12 lg:prose-xl sm:my-16">
+        <time dateTime={post.published_at || ''} className="italic text-neutral-500">
+          Published on{' '}
+          {post.published_at
+            ? new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              }).format(new Date(post.published_at))
+            : ''}
+        </time>
+        <div className="prose lg:prose-xl">
+          {post.html && <div dangerouslySetInnerHTML={{ __html: post.html }} />}
+        </div>
+      </Container>
+    </article>
   )
 }
 

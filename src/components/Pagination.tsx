@@ -18,15 +18,18 @@ export const Pagination = ({
   handlePageChange
 }: PaginationProps) => {
   return (
-    <nav className="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+    <nav className="flex items-center justify-between border-t border-neutral-200 px-4 sm:px-0">
       <div className="-mt-px flex w-0 flex-1">
         <button
-          className="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 disabled:border-transparent disabled:text-gray-300"
+          className="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-neutral-500 hover:border-neutral-300 hover:text-neutral-700 disabled:border-transparent disabled:text-neutral-300"
           onClick={() => handlePageChange(prevPage)}
           disabled={prevPage === null}
         >
           <ArrowLongLeftIcon
-            className={clsx('mr-3 h-5 w-5', prevPage === null ? 'text-gray-300' : 'text-gray-400')}
+            className={clsx(
+              'mr-3 h-5 w-5',
+              prevPage === null ? 'text-neutral-300' : 'text-neutral-400'
+            )}
             aria-hidden="true"
           />
           Previous
@@ -41,7 +44,7 @@ export const Pagination = ({
               'inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium',
               page === currentPage
                 ? 'border-primary-500 text-primary-500'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                : 'border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700'
             )}
             disabled={page === currentPage}
           >
@@ -51,13 +54,16 @@ export const Pagination = ({
       </div>
       <div className="-mt-px flex w-0 flex-1 justify-end">
         <button
-          className="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 disabled:border-transparent disabled:text-gray-300"
+          className="inline-flex items-center border-t-2 border-transparent pt-4 pl-1 text-sm font-medium text-neutral-500 hover:border-neutral-300 hover:text-neutral-700 disabled:border-transparent disabled:text-neutral-300"
           onClick={() => handlePageChange(nextPage)}
           disabled={nextPage === null}
         >
           Next
           <ArrowLongRightIcon
-            className={clsx('ml-3 h-5 w-5', nextPage === null ? 'text-gray-300' : 'text-gray-400')}
+            className={clsx(
+              'ml-3 h-5 w-5',
+              nextPage === null ? 'text-neutral-300' : 'text-neutral-400'
+            )}
             aria-hidden="true"
           />
         </button>
