@@ -1,9 +1,10 @@
 import { api } from './api'
 
-export async function getPosts() {
+export async function getPosts(page?: number, limit?: number) {
   return await api.posts
     .browse({
-      limit: 'all',
+      limit: limit ? limit : 'all',
+      page: page ? page : 1,
       include: ['tags', 'authors']
     })
     .catch((err) => {
