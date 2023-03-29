@@ -18,7 +18,7 @@ export const Pagination = ({
   handlePageChange
 }: PaginationProps) => {
   return (
-    <nav className="flex items-center justify-between border-t border-neutral-200 px-4 sm:px-0">
+    <nav className="flex items-center justify-between border-t border-neutral-100 px-4 sm:px-0">
       <div className="-mt-px flex w-0 flex-1">
         <button
           className="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-neutral-500 hover:border-neutral-300 hover:text-neutral-700 disabled:border-transparent disabled:text-neutral-300"
@@ -28,7 +28,7 @@ export const Pagination = ({
           <ArrowLongLeftIcon
             className={clsx(
               'mr-3 h-5 w-5',
-              prevPage === null ? 'text-neutral-300' : 'text-neutral-400'
+              prevPage === null ? 'text-neutral-300' : 'text-neutral-500'
             )}
             aria-hidden="true"
           />
@@ -41,10 +41,10 @@ export const Pagination = ({
             key={page}
             onClick={() => handlePageChange(page)}
             className={clsx(
-              'inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium',
+              'inline-flex items-center border-t-2 border-transparent px-4 py-2 text-sm font-medium',
               page === currentPage
-                ? 'border-primary-500 text-primary-500'
-                : 'border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700'
+                ? 'border-primary-500 bg-neutral-100 text-neutral-500'
+                : 'border-transparent text-neutral-400 hover:border-neutral-300 hover:text-neutral-700'
             )}
             disabled={page === currentPage}
           >
@@ -62,7 +62,7 @@ export const Pagination = ({
           <ArrowLongRightIcon
             className={clsx(
               'ml-3 h-5 w-5',
-              nextPage === null ? 'text-neutral-300' : 'text-neutral-400'
+              nextPage === null ? 'text-neutral-300' : 'text-neutral-500'
             )}
             aria-hidden="true"
           />
