@@ -1,58 +1,77 @@
 import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
-import { getPosts, Pagination, PostsOrPagesWithMeta, PostsOrPages } from '@/cms'
+import { getPosts, Pagination as PaginationType, PostsOrPagesWithMeta, PostsOrPages } from '@/cms'
 import { getPostsPaginated } from '@/cms/proxy'
 
 import { Container } from '@/components/Container'
-import { Button } from '@/components/Button'
+import { SectionHeading } from '@/components/SectionHeading'
+import { Pagination } from '@/components/Pagination'
+import { BlogList } from '@/components/BlogList'
 
 const LIMIT = 12
 
 type PostsPageProps = {
   posts: PostsOrPages
-  pagination: Pagination
+  pagination: PaginationType
 }
 
 export default function PostsPage({ posts, pagination }: PostsPageProps) {
   const [fetchedPosts, setFetchedPosts] = useState<PostsOrPages | []>(posts)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(pagination.page)
+  const [totalPages, setTotalPages] = useState(pagination.total)
+  const [nextPage, setNextPage] = useState<number | null>(pagination.next)
+  const [prevPage, setPrevPage] = useState<number | null>(pagination.prev)
 
   useEffect(() => {
     async function fetchPosts() {
       const fetchedPosts = await getPostsPaginated(currentPage, LIMIT)
+
       setFetchedPosts(fetchedPosts.posts)
       setTotalPages(fetchedPosts.pagination.pages)
+      setNextPage(fetchedPosts.pagination.next)
+      setPrevPage(fetchedPosts.pagination.prev)
     }
 
     fetchPosts()
-  }, [currentPage, pagination.pages])
+  }, [currentPage])
 
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = (newPage: number | null) => {
+    if (newPage === null) {
+      return
+    }
+
     setCurrentPage(newPage)
   }
 
+  const renderPagination = () => {
+    if (totalPages <= 1) {
+      return null
+    }
+
+    return (
+      <Container>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          handlePageChange={handlePageChange}
+        />
+      </Container>
+    )
+  }
+
   return (
-    <Container>
-      <h1>Posts</h1>
-
-      <ul>
-        {fetchedPosts.map((post) => (
-          <li key={post.id}>
-            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
-
-      <div>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <Button key={page} onClick={() => handlePageChange(page)} disabled={page === currentPage}>
-            Page {page}
-          </Button>
-        ))}
-      </div>
-    </Container>
+    <main>
+      <Container>
+        <SectionHeading
+          title="From the blog"
+          description="Learn how to grow your business with our expert advice."
+        />
+        <BlogList posts={fetchedPosts} />
+      </Container>
+      {renderPagination()}
+    </main>
   )
 }
 
