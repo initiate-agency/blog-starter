@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 
@@ -11,12 +11,18 @@ type PaginationProps = {
 }
 
 export const Pagination = ({
-  currentPage,
+  currentPage: _currentPage,
   totalPages,
   prevPage,
   nextPage,
   handlePageChange
 }: PaginationProps) => {
+  const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    setCurrentPage(_currentPage)
+  }, [_currentPage])
+
   return (
     <nav className="flex items-center justify-between border-t border-neutral-100 px-4 sm:px-0">
       <div className="-mt-px flex w-0 flex-1">
