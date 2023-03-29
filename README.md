@@ -32,6 +32,32 @@ GHOST_ADMIN_KEY=...
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Create a Vercel deployment hook:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    1. Go to your Vercel project's dashboard.
+
+    2. Click on the "Settings" tab.
+
+    3. In the left sidebar, click on "Git" under the "Integration" section.
+
+    4. Scroll down to find the "Deploy Hooks" section.
+
+    5. Enter a name for the new hook (e.g., "Ghost CMS Webhook") and select the Git branch to be used for the deployment (usually "main" or "master").
+
+    6. Click "Create Hook" and copy the generated URL.
+
+### Add the webhook to Ghost CMS:
+
+    1. Log in to your Ghost CMS admin panel.
+
+    2. Click on "Integrations" in the sidebar.
+
+    3. Click on "Add custom integration," give it a name (e.g., "Vercel Deployment"), and click "Create."
+
+    4. In the "Webhooks" section, click on "Add webhook."
+
+    5. Choose an event (e.g., "Site changed (rebuild)"). This event will be triggered when a post is published, updated, or deleted.
+
+    6. Paste the Vercel deployment hook URL you copied earlier into the "Target URL" field.
+
+    7. Click "Save."
