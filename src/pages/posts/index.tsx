@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import { getPosts, Pagination as PaginationType, PostsOrPagesWithMeta, PostsOrPages } from '@/cms'
 import { getPostsPaginated } from '@/cms/proxy'
+import { useQueryState, queryTypes } from 'next-usequerystate'
 
 import { Container } from '@/components/Container'
 import { SectionHeading } from '@/components/SectionHeading'
@@ -17,7 +18,10 @@ type PostsPageProps = {
 
 export default function PostsPage({ posts, pagination }: PostsPageProps) {
   const [fetchedPosts, setFetchedPosts] = useState<PostsOrPages | []>(posts)
-  const [currentPage, setCurrentPage] = useState(pagination.page)
+  const [currentPage, setCurrentPage] = useQueryState(
+    'page',
+    queryTypes.integer.withDefault(pagination.page)
+  )
   const [totalPages, setTotalPages] = useState(pagination.total)
   const [nextPage, setNextPage] = useState<number | null>(pagination.next)
   const [prevPage, setPrevPage] = useState<number | null>(pagination.prev)
