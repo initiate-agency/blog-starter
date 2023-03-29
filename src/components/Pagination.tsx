@@ -38,10 +38,10 @@ export const Pagination = ({
             key={page}
             onClick={() => handlePageChange(page)}
             className={clsx(
+              'inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium',
               page === currentPage
-                ? 'border-primary-600 text-primary-600'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-              'inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium'
+                ? 'border-primary-500 text-primary-500'
+                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             )}
             disabled={page === currentPage}
           >

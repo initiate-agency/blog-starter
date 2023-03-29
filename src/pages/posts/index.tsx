@@ -6,7 +6,7 @@ import { getPostsPaginated } from '@/cms/proxy'
 import { Container } from '@/components/Container'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Pagination } from '@/components/Pagination'
-import { BlogList } from '@/components/BlogList'
+import { PostList } from '@/components/PostList'
 
 const LIMIT = 12
 
@@ -68,7 +68,7 @@ export default function PostsPage({ posts, pagination }: PostsPageProps) {
           title="From the blog"
           description="Learn how to grow your business with our expert advice."
         />
-        <BlogList posts={fetchedPosts} />
+        <PostList posts={fetchedPosts} />
       </Container>
       {renderPagination()}
     </main>
