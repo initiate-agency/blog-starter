@@ -19,7 +19,10 @@ export default function PostPage({ post }: PostPageProps) {
       }).format(new Date(post.published_at))
     : ''
 
-  const postTimeToRead = `${post.reading_time} min read`
+  const postTimeToRead =
+    post.reading_time && post.reading_time > 0
+      ? `${post.reading_time} min read`
+      : 'Less than 1 min read'
 
   return (
     <article>
