@@ -4,6 +4,7 @@ import { getPostBySlug, getPosts, PostOrPage } from '@/cms'
 
 import { Container } from '@/components/Container'
 import { Author } from '@/components/Author'
+import { Tags } from '@/components/Tags'
 
 type PostPageProps = {
   post: PostOrPage
@@ -22,7 +23,7 @@ export default function PostPage({ post }: PostPageProps) {
 
   return (
     <article>
-      <div className="relative h-[250px] shadow-lg ring-1 ring-neutral-900/10 md:h-[400px] lg:h-[500px]">
+      <div className="relative h-[250px] shadow-xl ring-1 ring-neutral-900/10 md:h-[400px] lg:h-[500px]">
         <div className="absolute h-full w-full bg-gradient-to-t from-primary-950 to-transparent"></div>
         <div
           className="h-full w-full bg-cover bg-fixed bg-center bg-no-repeat"
@@ -30,7 +31,6 @@ export default function PostPage({ post }: PostPageProps) {
         />
         <Container className="z-10">
           <div className="absolute bottom-8 z-10 text-white lg:bottom-16">
-            <h1 className="text-3xl font-bold lg:text-5xl">{post.title}</h1>
             <Author
               avatarSrc={post.authors?.[0].profile_image || ''}
               avatarAlt={post.authors?.[0].name || ''}
@@ -38,8 +38,9 @@ export default function PostPage({ post }: PostPageProps) {
               description={`${postDate} • ${postTimeToRead}`}
               href={`/authors/${post.primary_author?.slug}` || ''}
               darkMode={true}
-              className="mt-4 hidden sm:mt-8 lg:block"
+              className="my-4 hidden sm:my-8 lg:block"
             />
+            <h1 className="pr-4 text-3xl font-bold lg:text-5xl">{post.title}</h1>
           </div>
         </Container>
       </div>
@@ -56,6 +57,11 @@ export default function PostPage({ post }: PostPageProps) {
         <div className="prose lg:prose-xl">
           {post.html && <div dangerouslySetInnerHTML={{ __html: post.html }} />}
         </div>
+        {post.tags && (
+          <div className="mt-8 sm:mt-16">
+            <Tags tags={post.tags.map((tag) => ({ name: tag.name || '', slug: tag.slug || '' }))} />
+          </div>
+        )}
       </Container>
     </article>
   )

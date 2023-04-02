@@ -31,7 +31,7 @@ export async function getPostBySlug(slug: string) {
         slug
       },
       {
-        include: 'authors'
+        include: ['tags', 'authors']
       }
     )
     .catch((err) => {

@@ -28,11 +28,7 @@ export function Author({
       <div className="flex items-center">
         <div>
           <img
-            className={clsx(
-              size === 'sm' ? ' h-9 w-9' : ' h-16 w-16',
-              darkMode && 'ring-1 ring-white',
-              'inline-block rounded-full'
-            )}
+            className={clsx(size === 'sm' ? ' h-9 w-9' : ' h-16 w-16', 'inline-block rounded-full')}
             src={avatarSrc}
             alt={avatarAlt}
           />

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { PostsOrPages, PostOrPage } from '@/cms'
 
 import { Author } from '@/components/Author'
+import { Tags } from '@/components/Tags'
 
 type BlogListProps = {
   posts: PostsOrPages | PostOrPage[] | []
@@ -18,7 +19,7 @@ export function PostList({ posts, show }: BlogListProps) {
     }
 
     return postList.map((post) => (
-      <article key={post.id} className="flex flex-col items-start justify-between">
+      <article key={post.id} className="flex flex-col items-start">
         <div className="relative w-full">
           <Link href={`/posts/${post.slug}`}>
             <img
@@ -30,17 +31,14 @@ export function PostList({ posts, show }: BlogListProps) {
           </Link>
         </div>
         <div className="max-w-xl">
-          <div className="mt-8 flex items-center gap-x-4 text-xs">
-            <time dateTime={post.published_at || ''} className="text-neutral-500">
+          <div className="mt-6 flex min-h-[28px] items-center gap-x-4 text-xs">
+            <time dateTime={post.published_at || ''} className="mt-2 text-neutral-500">
               {post.published_at ? new Date(post.published_at).toLocaleDateString('en-US') : ''}
             </time>
             {post.primary_tag && (
-              <Link
-                href={`tags/${post.primary_tag.slug}` || ''}
-                className="relative z-10 rounded-full bg-neutral-50 px-3 py-1.5 font-medium text-neutral-600 hover:bg-neutral-100"
-              >
-                {post.primary_tag.name}
-              </Link>
+              <div className="relative z-10">
+                <Tags tags={[{ name: post.primary_tag.name || '', slug: post.primary_tag.slug }]} />
+              </div>
             )}
           </div>
           <div className="group relative">
