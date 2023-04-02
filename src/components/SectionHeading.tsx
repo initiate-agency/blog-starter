@@ -1,11 +1,20 @@
+import clsx from 'clsx'
+
 type SectionHeadingProps = {
   title: string
   description: string
+  centered?: boolean
+  className?: string
 }
 
-export function SectionHeading({ title, description }: SectionHeadingProps) {
+export function SectionHeading({
+  title,
+  description,
+  className,
+  centered = false
+}: SectionHeadingProps) {
   return (
-    <div className="mx-auto max-w-2xl text-center">
+    <div className={clsx('max-w-2xl', centered && 'mx-auto text-center', className)}>
       <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">{title}</h2>
       <p className="mt-2 text-lg leading-8 text-neutral-600">{description}</p>
     </div>

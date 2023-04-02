@@ -12,12 +12,12 @@ export async function getPosts(page?: number, limit?: number) {
     })
 }
 
-export async function getPostsByTag(tags: string[]) {
+export async function getPostsByTag(tagSlugs: string[]) {
   return await api.posts
     .browse({
       limit: 'all',
       include: ['tags', 'authors'],
-      filter: `tags:[${tags.join(',')}]`
+      filter: `tags:[${tagSlugs.join(',')}]`
     })
     .catch((err) => {
       console.error(err)
