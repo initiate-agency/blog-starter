@@ -26,9 +26,14 @@ export async function getPostsByTag(tags: string[]) {
 
 export async function getPostBySlug(slug: string) {
   return await api.posts
-    .read({
-      slug
-    })
+    .read(
+      {
+        slug
+      },
+      {
+        include: 'authors'
+      }
+    )
     .catch((err) => {
       console.error(err)
     })
