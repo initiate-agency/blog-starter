@@ -2,6 +2,8 @@
 import Link from 'next/link'
 import { PostsOrPages, PostOrPage } from '@/cms'
 
+import { Author } from '@/components/Author'
+
 type BlogListProps = {
   posts: PostsOrPages | PostOrPage[] | []
   show?: number
@@ -35,45 +37,38 @@ export function PostList({ posts, show }: BlogListProps) {
             {post.primary_tag && (
               <Link
                 href={`tags/${post.primary_tag.slug}` || ''}
-                className="relative z-10 rounded-full bg-neutral-50 py-1.5 px-3 font-medium text-neutral-600 hover:bg-neutral-100"
+                className="relative z-10 rounded-full bg-neutral-50 px-3 py-1.5 font-medium text-neutral-600 hover:bg-neutral-100"
               >
                 {post.primary_tag.name}
               </Link>
             )}
           </div>
           <div className="group relative">
-            <h3 className="mt-3 text-lg font-semibold leading-6 text-neutral-900 line-clamp-1 group-hover:text-neutral-600">
+            <h3 className="mt-3 line-clamp-1 text-lg font-semibold leading-6 text-neutral-900 group-hover:text-neutral-600">
               <Link href={`/posts/${post.slug}`}>
                 <span className="absolute inset-0 truncate" />
                 {post.title}
               </Link>
             </h3>
-            <p className="mt-5 text-sm leading-6 text-neutral-600 line-clamp-3">
+            <p className="mt-5 line-clamp-3 text-sm leading-6 text-neutral-600">
               {post.custom_excerpt || post.excerpt || ''}
             </p>
           </div>
-          <div className="relative mt-8 flex items-center gap-x-4">
-            <img
-              src={post.primary_author?.profile_image || ''}
-              alt=""
-              className="h-10 w-10 rounded-full bg-neutral-100"
-            />
-            <div className="text-sm leading-6">
-              <p className="font-semibold text-neutral-900">
-                <Link href={`/authors/${post.primary_author?.slug}`}>
-                  <span className="absolute inset-0" />
-                  {post.primary_author?.name}
-                </Link>
-              </p>
-            </div>
-          </div>
+          <Author
+            avatarSrc={post.primary_author?.profile_image || ''}
+            avatarAlt={post.primary_author?.name || ''}
+            name={post.primary_author?.name || ''}
+            href={`/authors/${post.primary_author?.slug}`}
+            size="sm"
+            className="mt-4"
+          />
         </div>
       </article>
     ))
   }
 
   return (
-    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-y-20 gap-x-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
       {renderPosts()}
     </div>
   )
