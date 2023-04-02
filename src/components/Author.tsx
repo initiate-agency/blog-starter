@@ -38,8 +38,8 @@ export function Author({
             className={clsx(
               size === 'sm' ? 'text-xs' : 'text-md',
               darkMode
-                ? 'text-gray-100 group-hover:text-gray-200'
-                : 'text-gray-600 group-hover:text-gray-800',
+                ? 'text-neutral-100 group-hover:text-neutral-200'
+                : 'text-neutral-600 group-hover:text-neutral-800',
               'font-medium'
             )}
           >
@@ -50,8 +50,8 @@ export function Author({
               className={clsx(
                 size === 'sm' ? 'text-xs' : 'text-md',
                 darkMode
-                  ? 'text-gray-200 group-hover:text-gray-300'
-                  : 'text-gray-700 group-hover:text-gray-900',
+                  ? 'text-neutral-200 group-hover:text-neutral-300'
+                  : 'text-neutral-700 group-hover:text-neutral-900',
                 'font-medium'
               )}
             >
